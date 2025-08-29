@@ -28,6 +28,7 @@ export const API_CONFIG = {
       getPendingWithdrawals: "/api/withdrawal/admin/pending",
       getPromotions: "/api/promotion/status/",
       updatePromotion: "/api/promotion/status/",
+      SubmitSale: "/api/promotion/",
       getCharts: "/api/sales-chart/admin",
     },
   },

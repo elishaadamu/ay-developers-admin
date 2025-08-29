@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { notification } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ComponentCard from "../../../components/common/ComponentCard";
 import Label from "../../../components/form/Label";
@@ -75,7 +77,7 @@ export default function AddUsers() {
 
   // Options for role dropdown
   const roleOptions = [
-    { value: "manager", label: "Sales & Growth Manager" },
+    { value: "user", label: "Customer" },
     { value: "ambassador", label: "Ambassador" },
   ];
 
@@ -348,15 +350,7 @@ export default function AddUsers() {
         );
         console.log("Full response", response);
 
-        notification.success({
-          message: "User Added Successfully",
-          description:
-            "The new " +
-            `${formData.role}` +
-            " role has been added to the system successfully!",
-          duration: 4,
-          placement: "topRight",
-        });
+        toast.success("User added successfully!");
 
         // Clear form and reset file input
         const fileInput = document.getElementById(
@@ -428,6 +422,7 @@ export default function AddUsers() {
         desc="Fill in the details below to add a new user to the system."
       >
         <form onSubmit={handleSubmit} className="space-y-6">
+          <ToastContainer />
           {/* Two columns for desktop/tablet */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First Name */}
@@ -667,6 +662,7 @@ export default function AddUsers() {
                   firstName: false,
                   lastName: false,
                   role: false,
+                  
                   stateOfResidence: false,
                   localGovernment: false,
                   email: false,
