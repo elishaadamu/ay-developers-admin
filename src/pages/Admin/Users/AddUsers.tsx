@@ -79,6 +79,7 @@ export default function AddUsers() {
   const roleOptions = [
     { value: "user", label: "Customer" },
     { value: "ambassador", label: "Ambassador" },
+    { value: "manager", label: "SG Manager" },
   ];
 
   // Fetch states from API
@@ -662,7 +663,7 @@ export default function AddUsers() {
                   firstName: false,
                   lastName: false,
                   role: false,
-                  
+
                   stateOfResidence: false,
                   localGovernment: false,
                   email: false,
