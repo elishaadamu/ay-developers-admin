@@ -8,6 +8,7 @@ import { apiUrl, API_CONFIG } from "../../utilities/config";
 import axios from "axios";
 import { message } from "antd";
 import { Link } from "react-router-dom";
+import StatisticsChart from "../../components/ecommerce/StatisticsChart";
 
 interface UserData {
   id?: string;
@@ -279,7 +280,9 @@ export default function Home() {
         <div className="col-span-1 md:col-span-1 lg:col-span-5">
           <TicketsOverview />
         </div>
-
+        <div className="col-span-1 md:col-span-1 lg:col-span-12">
+          <StatisticsChart />
+        </div>
         {/* Recent Products */}
         <div className="col-span-1 md:col-span-1 lg:col-span-12">
           <div className="rounded-xl md:rounded-2xl border border-gray-200 bg-white px-4 py-4 md:px-6 md:py-6 dark:border-gray-800 dark:bg-white/[0.03]">

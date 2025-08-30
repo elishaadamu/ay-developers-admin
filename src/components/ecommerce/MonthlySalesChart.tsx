@@ -34,16 +34,22 @@ export default function MonthlySalesChart() {
       }
 
       const response = await axios.get(
-        `${apiUrl(API_CONFIG.ENDPOINTS.AUTH.getCharts)}`
+        `${apiUrl(API_CONFIG.ENDPOINTS.AUTH.getSales)}`
       );
 
-      console.log(
-        "🔄 Fetching customers from API....................",
-        response.data
-      );
-      setCharts(response.data);
+      console.log("🔄 Fetching charts from API", response.data.data);
+
+      const monthlySales = new Array(12).fill(0);
+      if (response.data && Array.isArray(response.data.data)) {
+        response.data.data.forEach((transaction: any) => {
+          const month = new Date(transaction.paidAt).getMonth();
+          monthlySales[month] += transaction.amount;
+        });
+      }
+
+      setCharts({ monthlySales: monthlySales });
     } catch (error) {
-      console.error("Error fetching customers:", error);
+      console.error("Error fetching charts:", error);
     }
   };
 
