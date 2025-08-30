@@ -254,14 +254,7 @@ export default function SGManager() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center md:justify-end gap-2 w-full mt-[0px] md:mt-[-20px]">
-            <button
-              onClick={() => setShowAddModal(true)}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-[11px] md:text-[14px] font-medium text-white hover:bg-blue-700"
-            >
-              Add S/G Manager
-            </button>
-          </div>
+          <div className="flex flex-wrap justify-center md:justify-end gap-2 w-full mt-[0px] md:mt-[-20px]"></div>
         </div>
 
         <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center">
