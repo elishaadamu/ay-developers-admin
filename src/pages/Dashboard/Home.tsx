@@ -55,7 +55,7 @@ export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(false);
-  const [balance, setBalance] = useState<number | null>(null);
+  const [, setBalance] = useState<number | null>(null);
 
   useEffect(() => {
     // Decrypt and load user data when component mounts
@@ -249,19 +249,6 @@ export default function Home() {
                     ? `${userData.firstName} ${userData.lastName}`
                     : userData?.name || "Unknown User"}
                 </p>
-              </div>
-
-              <div>
-                <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 ">
-                  Wallet Balance
-                </p>
-                {balance !== null ? (
-                  <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-white">
-                    ₦{balance.toFixed(2)}
-                  </p>
-                ) : (
-                  <p className="text-gray-500 dark:text-gray-400">Loading...</p>
-                )}
               </div>
             </div>
           </div>
