@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
@@ -86,8 +86,7 @@ export default function SignInForm() {
     } catch (error: any) {
       console.error("Signin error:", error);
 
-      const errorMessage =
-        error.response?.data?.message || "Invalid email or password";
+      const errorMessage = error.message || "Invalid email or password";
       toast.error(errorMessage);
     } finally {
       setIsLoading(false);

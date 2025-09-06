@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ComponentCard from "../../../components/common/ComponentCard";
@@ -188,7 +188,9 @@ export default function AddUsers() {
     // Check file size (50KB = 50 * 1024 bytes)
     const maxSize = 50 * 1024;
     if (file.size > maxSize) {
-      toast.error("Image size must be less than 50KB. Please compress your image and try again.");
+      toast.error(
+        "Image size must be less than 50KB. Please compress your image and try again."
+      );
       fileInput.value = ""; // Clear the input
       return;
     }
@@ -364,7 +366,10 @@ export default function AddUsers() {
         console.error("Error creating user:", error);
 
         if (axios.isAxiosError(error)) {
-          toast.error(error.response?.data?.message || "Failed to add user. Please try again.");
+          toast.error(
+            error.response?.data?.message ||
+              "Failed to add user. Please try again."
+          );
         } else {
           toast.error("An unexpected error occurred. Please try again.");
         }
