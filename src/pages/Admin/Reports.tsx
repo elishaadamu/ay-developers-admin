@@ -697,8 +697,7 @@ export default function Reports() {
                 Ambassadors Sales Report
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                View ambassador sales by period and export as PDF for email
-                distribution.
+                View sales by period and export as PDF for email distribution.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">

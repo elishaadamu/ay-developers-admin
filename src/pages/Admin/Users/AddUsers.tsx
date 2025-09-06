@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { notification } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -189,13 +188,7 @@ export default function AddUsers() {
     // Check file size (50KB = 50 * 1024 bytes)
     const maxSize = 50 * 1024;
     if (file.size > maxSize) {
-      notification.error({
-        message: "Image Size Error",
-        description:
-          "Image size must be less than 50KB. Please compress your image and try again.",
-        duration: 4,
-        placement: "topRight",
-      });
+      toast.error("Image size must be less than 50KB. Please compress your image and try again.");
       fileInput.value = ""; // Clear the input
       return;
     }
@@ -203,13 +196,7 @@ export default function AddUsers() {
     // Check file type
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
-      notification.error({
-        message: "Invalid File Type",
-        description:
-          "Please select a valid image file (JPEG, JPG, PNG, or GIF).",
-        duration: 4,
-        placement: "topRight",
-      });
+      toast.error("Please select a valid image file (JPEG, JPG, PNG, or GIF).");
       fileInput.value = ""; // Clear the input
       return;
     }
@@ -219,19 +206,9 @@ export default function AddUsers() {
       setFormData((prev) => ({ ...prev, passport: base64 }));
       setImagePreview(base64);
 
-      notification.success({
-        message: "Image Uploaded",
-        description: "Profile image uploaded successfully!",
-        duration: 3,
-        placement: "topRight",
-      });
+      toast.success("Profile image uploaded successfully!");
     } catch (error) {
-      notification.error({
-        message: "Upload Error",
-        description: "Failed to process the image. Please try again.",
-        duration: 4,
-        placement: "topRight",
-      });
+      toast.error("Failed to process the image. Please try again.");
       fileInput.value = ""; // Clear the input
     }
   };
@@ -387,30 +364,13 @@ export default function AddUsers() {
         console.error("Error creating user:", error);
 
         if (axios.isAxiosError(error)) {
-          notification.error({
-            message: "Submission Failed",
-            description:
-              error.response?.data?.message ||
-              "Failed to add user. Please try again.",
-            duration: 4,
-            placement: "topRight",
-          });
+          toast.error(error.response?.data?.message || "Failed to add user. Please try again.");
         } else {
-          notification.error({
-            message: "Submission Failed",
-            description: "An unexpected error occurred. Please try again.",
-            duration: 4,
-            placement: "topRight",
-          });
+          toast.error("An unexpected error occurred. Please try again.");
         }
       }
     } else {
-      notification.warning({
-        message: "Form Validation Error",
-        description: "Please fix the errors in the form and try again.",
-        duration: 4,
-        placement: "topRight",
-      });
+      toast.warning("Please fix the errors in the form and try again.");
     }
 
     setIsSubmitting(false);
@@ -423,7 +383,6 @@ export default function AddUsers() {
         desc="Fill in the details below to add a new user to the system."
       >
         <form onSubmit={handleSubmit} className="space-y-6">
-          <ToastContainer />
           {/* Two columns for desktop/tablet */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First Name */}

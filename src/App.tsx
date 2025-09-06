@@ -1,7 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SignIn from "./pages/AuthPages/SignIn";
-import SignUp from "./pages/AuthPages/SignUp";
+// import SignUp from "./pages/AuthPages/SignUp";
 import NotFound from "./pages/OtherPage/NotFound";
 import AdminProfile from "./pages/AuthPages/AdminProfile";
 import Videos from "./pages/UiElements/Videos";
@@ -80,6 +82,7 @@ export default function App() {
 
   return (
     <>
+      <ToastContainer />
       <Router>
         <ScrollToTop />
 
@@ -134,7 +137,7 @@ export default function App() {
 
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/signup" element={<SignUp />} /> */}
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />

@@ -198,6 +198,32 @@ export default function SGManager() {
     }
   };
 
+  const handleSendReport = async (user: User) => {
+    try {
+      const managerId = user._id || user.id!;
+      console.log(`🔄 Sending report for S/G Manager:`, managerId);
+
+      const response = await axios.get(
+        apiUrl(`${API_CONFIG.ENDPOINTS.AUTH.getEmail}${managerId}`)
+      );
+
+      console.log("✅ Report sent successfully:", response.data);
+      message.success("Report sent successfully");
+    } catch (error) {
+      console.error("❌ Error sending report:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("📋 Error response:", error.response?.data);
+        console.error("📊 Error status:", error.response?.status);
+        message.error(
+          error.response?.data?.message || "Failed to send report"
+        );
+      } else {
+        message.error("Failed to send report");
+      }
+      throw error;
+    }
+  };
+
   const filteredUsers = users.filter((user) => {
     if (user.role !== "manager") {
       return false;
@@ -295,6 +321,7 @@ export default function SGManager() {
           onUpdate={updateUser}
           onViewPerformance={handleViewPerformance}
           onSuspend={handleSuspendUser}
+          onSendReport={handleSendReport}
         />
 
         <AddUserModal

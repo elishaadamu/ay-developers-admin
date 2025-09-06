@@ -66,7 +66,7 @@ export default function Products() {
       );
 
       console.log("✅ Products fetched successfully:", response.data);
-      setProducts(response.data.products || response.data || []);
+      setProducts(response.data || []);
     } catch (error) {
       console.error("❌ Error fetching products:", error);
       message.error("Failed to fetch products");
@@ -177,7 +177,6 @@ export default function Products() {
     const matchesSearch = product.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchesStatus = product.status;
 
     // Add date range filtering
     const matchesDate =
@@ -190,7 +189,7 @@ export default function Products() {
         "[]"
       );
 
-    return matchesSearch && matchesStatus && matchesDate;
+    return matchesSearch && matchesDate;
   });
 
   // Add date range change handler

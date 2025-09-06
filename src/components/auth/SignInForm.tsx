@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
 import Checkbox from "../form/input/Checkbox";
-import { notification } from "antd";
 import axios from "axios";
 import { API_CONFIG, apiUrl } from "../../utilities/config";
 import { encryptData } from "../../utilities/encryption";
@@ -24,7 +25,6 @@ export default function SignInForm() {
   });
 
   const navigate = useNavigate();
-  const [api, contextHolder] = notification.useNotification();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,20 +38,12 @@ export default function SignInForm() {
     const { email, password } = formData;
 
     if (!email.trim()) {
-      api.error({
-        message: "Validation Error",
-        description: "Email is required",
-        placement: "topRight",
-      });
+      toast.error("Email is required");
       return false;
     }
 
     if (!password.trim()) {
-      api.error({
-        message: "Validation Error",
-        description: "Password is required",
-        placement: "topRight",
-      });
+      toast.error("Password is required");
       return false;
     }
 
@@ -79,14 +71,8 @@ export default function SignInForm() {
       if (response.data) {
         const encryptedUserData = encryptData(response.data);
         localStorage.setItem("userData", encryptedUserData);
+        toast.success("Signed in successfully. Welcome back!");
       }
-
-      api.success({
-        message: "Success!",
-        description: "Signed in successfully. Welcome back!",
-        placement: "topRight",
-        duration: 3,
-      });
 
       // Clear form data
       setFormData({
@@ -102,12 +88,7 @@ export default function SignInForm() {
 
       const errorMessage =
         error.response?.data?.message || "Invalid email or password";
-      api.error({
-        message: "Sign In Failed",
-        description: errorMessage,
-        placement: "topRight",
-        duration: 5,
-      });
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +96,6 @@ export default function SignInForm() {
 
   return (
     <div className="flex flex-col flex-1">
-      {contextHolder}
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           <div className="mb-5 sm:mb-8">
@@ -203,18 +183,6 @@ export default function SignInForm() {
                 </div>
               </div>
             </form>
-
-            <div className="mt-5">
-              <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
-                Don&apos;t have an account? {""}
-                <Link
-                  to="/signup"
-                  className="text-brand-500 hover:text-brand-600 dark:text-brand-400"
-                >
-                  Sign Up
-                </Link>
-              </p>
-            </div>
           </div>
         </div>
       </div>

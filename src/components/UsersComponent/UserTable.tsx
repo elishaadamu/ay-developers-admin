@@ -101,6 +101,32 @@ export default function UserTable({
     }
   };
 
+  const handleSendReport = async (user: User) => {
+    if (
+      window.confirm(
+        `Are you sure you want to send a report for ${user.firstName} ${user.lastName}?`
+      )
+    ) {
+      if (onSendReport) {
+        try {
+          await onSendReport(user);
+          api.success({
+            message: "Report Sent",
+            description: `A report has been successfully sent to ${user.firstName} ${user.lastName}.`,
+            placement: "topRight",
+          });
+        } catch (error) {
+          console.error("Error sending report:", error);
+          api.error({
+            message: "Failed to Send Report",
+            description:
+              "There was an error sending the report. Please try again.",
+            placement: "topRight",
+          });
+        }
+      }
+    }
+  };
   // Define the type for menu items
   type MenuItem = Required<MenuProps>["items"][number];
 
@@ -139,9 +165,7 @@ export default function UserTable({
             Send Report
           </div>
         ),
-        onClick: () => {
-          if (onSendReport) onSendReport(user);
-        },
+        onClick: () => handleSendReport(user),
       },
       {
         key: "suspend",
